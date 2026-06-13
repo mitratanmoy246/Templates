@@ -13,8 +13,8 @@ void solve()
 
 int main()
 {
-    int t = 1;
-    // scanf("%d", &t); // uncomment for multiple test cases
+    int t=1;
+    // scanf("%d", &t);
 
     while(t--)
     {
