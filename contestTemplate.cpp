@@ -1,11 +1,3 @@
-/*
- * Author      : Tanmoy Mitra
- * Codeforces  : mitratanmoy246
- * CodeChef    : band_deed_94
- * Language    : GNU C++23
- * Version     : 1.3
- */
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -48,9 +40,21 @@ constexpr ll INF = 1000000000000000000LL;
 
 // Number Theory
 bool is_prime(ll n){ if(n<2) return false; if(n==2||n==3) return true; if(n%2==0||n%3==0) return false; for(ll i=5;i*i<=n;i+=6) if(n%i==0||n%(i+2)==0) return false; return true; }
+// Binary search on Answer
+
+// Use (__int128) when multiplying large numbers.
+bool check(ll mid){
+    return true;
+}
+//First True(For Minimum valid)
+ll first_true(ll l,ll r){ll ans=r; while(l<=r){ll mid=l+(r-l)/2; if(check(mid)){ans=mid;r=mid-1;}else l=mid+1;}return ans;}
+//Last True(For Maximum valid)
+ll last_true(ll l, ll r){ll ans=l; while(l<=r){ll mid=l+(r-l)/2;if(check(mid)){ans=mid;l=mid+1;}else r=mid-1;}return ans;}
+
 
 void solve(){
     // Problem logic here
+    
 }
 
 int main(){
