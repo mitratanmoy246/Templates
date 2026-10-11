@@ -1,0 +1,700 @@
+
+{
+    "Competitive Programming Template": {
+        "prefix": "cp",
+        "body": [
+            "#include <bits/stdc++.h>",
+            "using namespace std;",
+            "",
+            "using ll = long long;",
+            "using ull = unsigned long long;",
+            "using ld = long double;",
+            "using vi = vector<int>;",
+            "using vll = vector<ll>;",
+            "",
+            "constexpr int MOD = 1000000007;",
+            "constexpr ll INF = 1000000000000000000LL;",
+            "",
+            "#define fast ios::sync_with_stdio(false); cin.tie(nullptr)",
+            "#define pb push_back",
+            "#define F first",
+            "#define S second",
+            "#define all(v) (v).begin(), (v).end()",
+            "#define rall(v) (v).rbegin(), (v).rend()",
+            "#define sz(v) ((int)(v).size())",
+            "",
+            "#define read(a,n) for(int i=0;i<n;i++) cin>>a[i]",
+            "#define print(v) for(auto x:v) cout<<x<<' '; cout<<'\\n'",
+            "#define yes cout<<\"YES\\n\"",
+            "#define no cout<<\"NO\\n\"",
+            "#define endl '\\n'",
+            "",
+            "void solve(){",
+            "    int n;",
+            "    cin>>n;",
+            "    vi a(n);",
+            "    read(a,n);",
+            "    $0",
+            "}",
+            "",
+            "signed main(){",
+            "    fast;",
+            "",
+            "    int test_case=1;",
+            "    // cin>>test_case;",
+            "",
+            "    while(test_case--){",
+            "        solve();",
+            "    }",
+            "",
+            "    return 0;",
+            "}"
+        ],
+        "description": "Minimal competitive programming template"
+    },
+
+    "GCD Function": {
+        "prefix": "gcd",
+        "body": [
+            "ll gcdll(ll a,ll b){",
+            "    while(b){",
+            "        ll r=a%b;",
+            "        a=b;",
+            "        b=r;",
+            "    }",
+            "    return a<0?-a:a;",
+            "}"
+        ],
+        "description": "GCD; requires ll"
+    },
+
+    "LCM Function": {
+        "prefix": "lcm",
+        "body": [
+            "ll lcmll(ll a,ll b){",
+            "    if(a==0 || b==0)return 0;",
+            "    return a/gcdll(a,b)*b;",
+            "}"
+        ],
+        "description": "LCM; requires ll and gcdll"
+    },
+
+    "Binary Exponentiation": {
+        "prefix": "binpow",
+        "body": [
+            "ll binpow(ll a,ll b){",
+            "    ll res=1;",
+            "    while(b>0){",
+            "        if(b&1)res*=a;",
+            "        b>>=1;",
+            "        if(b)a*=a;",
+            "    }",
+            "    return res;",
+            "}"
+        ],
+        "description": "Ordinary binary exponentiation; may overflow"
+    },
+
+    "Modular Exponentiation": {
+        "prefix": "modpow",
+        "body": [
+            "ll modpow(ll a,ll b,ll mod=MOD){",
+            "    ll res=1;",
+            "    a%=mod;",
+            "    while(b>0){",
+            "        if(b&1)res=res*a%mod;",
+            "        a=a*a%mod;",
+            "        b>>=1;",
+            "    }",
+            "    return res;",
+            "}"
+        ],
+        "description": "Modular exponentiation; requires ll and MOD"
+    },
+
+    "Modular Inverse": {
+        "prefix": "modinv",
+        "body": [
+            "ll modInverse(ll n,ll mod=MOD){",
+            "    return modpow(n,mod-2,mod);",
+            "}"
+        ],
+        "description": "Requires modpow; prime modulus and n not divisible by mod"
+    },
+
+    "Prime Check": {
+        "prefix": "isprime",
+        "body": [
+            "bool isPrime(ll n){",
+            "    if(n<2)return false;",
+            "    if(n<=3)return true;",
+            "    if(n%2==0 || n%3==0)return false;",
+            "    for(ll i=5;i<=n/i;i+=6){",
+            "        if(n%i==0 || n%(i+2)==0)return false;",
+            "    }",
+            "    return true;",
+            "}"
+        ],
+        "description": "Primality test; requires ll"
+    },
+
+    "Sieve of Eratosthenes": {
+        "prefix": "sieve",
+        "body": [
+            "vi sieve(int n){",
+            "    vi prime(n+1,1);",
+            "    prime[0]=0;",
+            "    if(n>=1)prime[1]=0;",
+            "    for(ll i=2;i*i<=n;i++){",
+            "        if(prime[i]){",
+            "            for(ll j=i*i;j<=n;j+=i){",
+            "                prime[j]=0;",
+            "            }",
+            "        }",
+            "    }",
+            "    return prime;",
+            "}"
+        ],
+        "description": "Prime marking sieve; requires vi and ll"
+    },
+
+    "SPF Sieve": {
+        "prefix": "spf",
+        "body": [
+            "vi spf,primes;",
+            "",
+            "void buildSPF(int n){",
+            "    spf.assign(n+1,0);",
+            "    primes.clear();",
+            "    for(int i=2;i<=n;i++)spf[i]=i;",
+            "    for(ll i=2;i*i<=n;i++){",
+            "        if(spf[i]==i){",
+            "            for(ll j=i*i;j<=n;j+=i){",
+            "                if(spf[j]==j)spf[j]=i;",
+            "            }",
+            "        }",
+            "    }",
+            "    for(int i=2;i<=n;i++){",
+            "        if(spf[i]==i)primes.pb(i);",
+            "    }",
+            "}"
+        ],
+        "description": "Smallest prime factor sieve; requires vi, ll and pb"
+    },
+
+    "Prime Factorization": {
+        "prefix": "factor",
+        "body": [
+            "vi getFactorization(int x){",
+            "    vi ret;",
+            "    if(x<1 || x>=sz(spf))return ret;",
+            "    while(x>1){",
+            "        ret.pb(spf[x]);",
+            "        x/=spf[x];",
+            "    }",
+            "    return ret;",
+            "}"
+        ],
+        "description": "Requires SPF sieve, vi, sz and pb"
+    },
+
+    "Factorization with Powers": {
+        "prefix": "factorpow",
+        "body": [
+            "vector<pair<int,int>> getFactorizationPowers(int x){",
+            "    vector<pair<int,int>> ret;",
+            "    if(x<1 || x>=sz(spf))return ret;",
+            "    while(x>1){",
+            "        int p=spf[x],cnt=0;",
+            "        while(x%p==0){",
+            "            cnt++;",
+            "            x/=p;",
+            "        }",
+            "        ret.emplace_back(p,cnt);",
+            "    }",
+            "    return ret;",
+            "}"
+        ],
+        "description": "Prime factors with exponents; requires SPF sieve and sz"
+    },
+
+    "Get Divisors": {
+        "prefix": "divisors",
+        "body": [
+            "vi getDivisors(int n){",
+            "    vi divs;",
+            "    if(n<=0)return divs;",
+            "    for(ll i=1;i*i<=n;i++){",
+            "        if(n%i==0){",
+            "            divs.pb(i);",
+            "            if(i*i!=n)divs.pb(n/i);",
+            "        }",
+            "    }",
+            "    sort(all(divs));",
+            "    return divs;",
+            "}"
+        ],
+        "description": "Returns all positive divisors in sorted order"
+    },
+
+    "Count Divisors": {
+        "prefix": "cntdiv",
+        "body": [
+            "int countDivisors(int n){",
+            "    if(n<=0)return 0;",
+            "    int cnt=0;",
+            "    for(ll i=1;i*i<=n;i++){",
+            "        if(n%i==0){",
+            "            cnt++;",
+            "            if(i*i!=n)cnt++;",
+            "        }",
+            "    }",
+            "    return cnt;",
+            "}"
+        ],
+        "description": "Counts positive divisors"
+    },
+
+    "Sum Divisors": {
+        "prefix": "sumdiv",
+        "body": [
+            "ll sumDivisors(int n){",
+            "    if(n<=0)return 0;",
+            "    ll sum=0;",
+            "    for(ll i=1;i*i<=n;i++){",
+            "        if(n%i==0){",
+            "            sum+=i;",
+            "            if(i*i!=n)sum+=n/i;",
+            "        }",
+            "    }",
+            "    return sum;",
+            "}"
+        ],
+        "description": "Sum of all positive divisors"
+    },
+
+    "Euler Totient": {
+        "prefix": "phi",
+        "body": [
+            "int phi(int n){",
+            "    if(n<=0)return 0;",
+            "    int res=n;",
+            "    for(ll i=2;i*i<=n;i++){",
+            "        if(n%i==0){",
+            "            while(n%i==0)n/=i;",
+            "            res-=res/(int)i;",
+            "        }",
+            "    }",
+            "    if(n>1)res-=res/n;",
+            "    return res;",
+            "}"
+        ],
+        "description": "Euler totient function; requires ll"
+    },
+
+    "Count Primes from SPF": {
+        "prefix": "countprimes",
+        "body": [
+            "int countPrimesUpto(int n){",
+            "    return upper_bound(primes.begin(),primes.end(),n)-primes.begin();",
+            "}"
+        ],
+        "description": "Counts primes up to n; requires buildSPF"
+    },
+
+    "Set Bit": {
+        "prefix": "setbit",
+        "body": [
+            "n|=(1LL<<i);"
+        ],
+        "description": "Sets bit i of n"
+    },
+
+    "Unset Bit": {
+        "prefix": "unsetbit",
+        "body": [
+            "n&=~(1LL<<i);"
+        ],
+        "description": "Unsets bit i of n"
+    },
+
+    "Toggle Bit": {
+        "prefix": "togglebit",
+        "body": [
+            "n^=(1LL<<i);"
+        ],
+        "description": "Toggles bit i of n"
+    },
+
+    "Check Bit": {
+        "prefix": "checkbit",
+        "body": [
+            "(n>>i)&1LL"
+        ],
+        "description": "Checks bit i of n"
+    },
+
+    "Even or Odd": {
+        "prefix": "evenodd",
+        "body": [
+            "if(n%2==0){",
+            "    $0",
+            "}else{",
+            "    ",
+            "}"
+        ],
+        "description": "Even/odd check"
+    },
+
+    "Lowest Set Bit": {
+        "prefix": "lowbit",
+        "body": [
+            "n&-n"
+        ],
+        "description": "Extracts the lowest set bit"
+    },
+
+    "Count Set Bits": {
+        "prefix": "popcount",
+        "body": [
+            "__builtin_popcountll(n)"
+        ],
+        "description": "Counts set bits in a long long"
+    },
+
+    "Power of Two Check": {
+        "prefix": "pow2",
+        "body": [
+            "bool isPowerOfTwo(ll n){",
+            "    return n>0 && (n&(n-1))==0;",
+            "}"
+        ],
+        "description": "Checks whether n is a power of two"
+    },
+
+    "Check Minimum": {
+        "prefix": "chkmin",
+        "body": [
+            "template<class T>",
+            "bool chkmin(T &a,T b){",
+            "    if(b<a){",
+            "        a=b;",
+            "        return true;",
+            "    }",
+            "    return false;",
+            "}"
+        ],
+        "description": "Updates a when b is smaller"
+    },
+
+    "Check Maximum": {
+        "prefix": "chkmax",
+        "body": [
+            "template<class T>",
+            "bool chkmax(T &a,T b){",
+            "    if(a<b){",
+            "        a=b;",
+            "        return true;",
+            "    }",
+            "    return false;",
+            "}"
+        ],
+        "description": "Updates a when b is larger"
+    },
+
+    "BFS": {
+        "prefix": "bfs",
+        "body": [
+            "void bfs(int src,vector<vi>& adj,vi& vis){",
+            "    queue<int> q;",
+            "    q.push(src);",
+            "    vis[src]=1;",
+            "    while(!q.empty()){",
+            "        int u=q.front();",
+            "        q.pop();",
+            "        for(int v:adj[u]){",
+            "            if(!vis[v]){",
+            "                vis[v]=1;",
+            "                q.push(v);",
+            "            }",
+            "        }",
+            "    }",
+            "}"
+        ],
+        "description": "Breadth-first traversal; requires vi"
+    },
+
+    "DFS": {
+        "prefix": "dfs",
+        "body": [
+            "void dfs(int u,vector<vi>& adj,vi& vis){",
+            "    vis[u]=1;",
+            "    for(int v:adj[u]){",
+            "        if(!vis[v])dfs(v,adj,vis);",
+            "    }",
+            "}"
+        ],
+        "description": "Depth-first traversal; requires vi"
+    },
+
+    "DSU": {
+        "prefix": "dsu",
+        "body": [
+            "struct DSU{",
+            "    vi par,sz;",
+            "    DSU(int n){",
+            "        par.resize(n+1);",
+            "        sz.assign(n+1,1);",
+            "        iota(par.begin(),par.end(),0);",
+            "    }",
+            "    int find(int x){",
+            "        if(par[x]==x)return x;",
+            "        return par[x]=find(par[x]);",
+            "    }",
+            "    bool unite(int a,int b){",
+            "        a=find(a);",
+            "        b=find(b);",
+            "        if(a==b)return false;",
+            "        if(sz[a]<sz[b])swap(a,b);",
+            "        par[b]=a;",
+            "        sz[a]+=sz[b];",
+            "        return true;",
+            "    }",
+            "};"
+        ],
+        "description": "DSU with path compression and union by size; requires vi"
+    },
+
+    "Ordered Set PBDS": {
+        "prefix": "oset",
+        "body": [
+            "#include <ext/pb_ds/assoc_container.hpp>",
+            "#include <ext/pb_ds/tree_policy.hpp>",
+            "using namespace __gnu_pbds;",
+            "",
+            "template<class T>",
+            "using ordered_set = tree<T,null_type,less<T>,rb_tree_tag,tree_order_statistics_node_update>;",
+            "",
+            "using oset = ordered_set<int>;"
+        ],
+        "description": "PBDS ordered set; GNU C++ extension"
+    },
+
+    "Descending Ordered Set PBDS": {
+        "prefix": "osetdesc",
+        "body": [
+            "using oset_desc = tree<int,null_type,greater<int>,rb_tree_tag,tree_order_statistics_node_update>;"
+        ],
+        "description": "Requires PBDS headers and namespace"
+    },
+
+    "Debug Macro": {
+        "prefix": "debug",
+        "body": [
+            "#ifndef ONLINE_JUDGE",
+            "#define debug(x) cerr<<#x<<\" = \"<<(x)<<'\\n'",
+            "#else",
+            "#define debug(x)",
+            "#endif"
+        ],
+        "description": "Simple debug macro for stream-printable values"
+    },
+
+    "Read Array": {
+        "prefix": "read",
+        "body": [
+            "for(int i=0;i<n;i++)cin>>a[i];"
+        ],
+        "description": "Reads n elements into a"
+    },
+
+    "Read 1-Indexed Array": {
+        "prefix": "read1",
+        "body": [
+            "for(int i=1;i<=n;i++)cin>>a[i];"
+        ],
+        "description": "Reads a 1-indexed array"
+    },
+
+    "Print Array": {
+        "prefix": "print",
+        "body": [
+            "for(auto x:a)cout<<x<<' ';",
+            "cout<<'\\n';"
+        ],
+        "description": "Prints elements of a"
+    },
+
+    "Vector of Pairs": {
+        "prefix": "vpii",
+        "body": [
+            "vector<pair<int,int>> $1;",
+            "$0"
+        ],
+        "description": "Declares a vector of integer pairs"
+    },
+
+    "2D Integer Vector": {
+        "prefix": "vec2d",
+        "body": [
+            "vector<vector<int>> $1($2,vector<int>($3,$4));"
+        ],
+        "description": "Creates an n by m integer matrix with an initial value"
+    },
+
+    "2D Long Long Vector": {
+        "prefix": "vec2dll",
+        "body": [
+            "vector<vector<ll>> $1($2,vector<ll>($3,$4));"
+        ],
+        "description": "Creates an n by m long long matrix"
+    },
+
+    "Loop": {
+        "prefix": "rep",
+        "body": [
+            "for(int i=$1;i<$2;i++){",
+            "    $0",
+            "}"
+        ],
+        "description": "Forward loop"
+    },
+
+    "Reverse Loop": {
+        "prefix": "rev",
+        "body": [
+            "for(int i=$1;i>=$2;i--){",
+            "    $0",
+            "}"
+        ],
+        "description": "Reverse loop"
+    },
+
+    "Test Cases": {
+        "prefix": "tc",
+        "body": [
+            "int test_case;",
+            "cin>>test_case;",
+            "while(test_case--){",
+            "    $0",
+            "}"
+        ],
+        "description": "Test case loop"
+    },
+
+    "Graph Adjacency List": {
+        "prefix": "graph",
+        "body": [
+            "int n,m;",
+            "cin>>n>>m;",
+            "vector<vi> adj(n+1);",
+            "for(int i=0;i<m;i++){",
+            "    int u,v;",
+            "    cin>>u>>v;",
+            "    adj[u].pb(v);",
+            "    adj[v].pb(u);",
+            "}"
+        ],
+        "description": "Builds an undirected graph; requires vi and pb"
+    },
+
+    "Weighted Graph": {
+        "prefix": "wgraph",
+        "body": [
+            "int n,m;",
+            "cin>>n>>m;",
+            "vector<vector<pair<int,int>>> adj(n+1);",
+            "for(int i=0;i<m;i++){",
+            "    int u,v,w;",
+            "    cin>>u>>v>>w;",
+            "    adj[u].push_back({v,w});",
+            "    adj[v].push_back({u,w});",
+            "}"
+        ],
+        "description": "Builds an undirected weighted graph"
+    },
+
+    "Dijkstra": {
+        "prefix": "dijkstra",
+        "body": [
+            "vector<ll> dijkstra(int src,vector<vector<pair<int,int>>>& adj){",
+            "    int n=adj.size();",
+            "    vector<ll> dist(n,INF);",
+            "    priority_queue<pair<ll,int>,vector<pair<ll,int>>,greater<pair<ll,int>>> pq;",
+            "    dist[src]=0;",
+            "    pq.push({0,src});",
+            "    while(!pq.empty()){",
+            "        auto [d,u]=pq.top();",
+            "        pq.pop();",
+            "        if(d!=dist[u])continue;",
+            "        for(auto [v,w]:adj[u]){",
+            "            if(dist[v]>d+w){",
+            "                dist[v]=d+w;",
+            "                pq.push({dist[v],v});",
+            "            }",
+            "        }",
+            "    }",
+            "    return dist;",
+            "}"
+        ],
+        "description": "Shortest paths for non-negative edge weights; requires ll and INF"
+    },
+
+    "Ordered Set Operations": {
+        "prefix": "orderops",
+        "body": [
+            "$1.insert($2);",
+            "int lessCnt=$1.order_of_key($2);",
+            "auto it=$1.find_by_order($3);"
+        ],
+        "description": "PBDS insert, count smaller elements, and zero-based kth element"
+    },
+
+    "Set Bit Macro": {
+        "prefix": "setbitmacro",
+        "body": [
+            "#define setBit(x,i) ((x)|(1LL<<(i)))"
+        ],
+        "description": "Expression returning x with bit i set"
+    },
+
+    "Unset Bit Macro": {
+        "prefix": "unsetbitmacro",
+        "body": [
+            "#define clearBit(x,i) ((x)&~(1LL<<(i)))"
+        ],
+        "description": "Expression returning x with bit i cleared"
+    },
+
+    "Toggle Bit Macro": {
+        "prefix": "togglebitmacro",
+        "body": [
+            "#define toggleBit(x,i) ((x)^(1LL<<(i)))"
+        ],
+        "description": "Expression returning x with bit i toggled"
+    },
+
+    "Check Bit Macro": {
+        "prefix": "checkbitmacro",
+        "body": [
+            "#define checkBit(x,i) (((x)>>(i))&1LL)"
+        ],
+        "description": "Expression returning bit i"
+    },
+
+    "GCD Call": {
+        "prefix": "gcdcall",
+        "body": [
+            "gcdll($1,$2)"
+        ],
+        "description": "Calls gcdll"
+    },
+
+    "LCM Call": {
+        "prefix": "lcmcall",
+        "body": [
+            "lcmll($1,$2)"
+        ],
+        "description": "Calls lcmll; requires gcdll"
+    }
+}
