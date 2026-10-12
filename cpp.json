@@ -6,9 +6,11 @@
             "#include <bits/stdc++.h>",
             "using namespace std;",
             "",
+
+            "#define int long long",
+            "#define double long double",
             "using ll = long long;",
             "using ull = unsigned long long;",
-            "using ld = long double;",
             "using vi = vector<int>;",
             "using vll = vector<ll>;",
             "",
